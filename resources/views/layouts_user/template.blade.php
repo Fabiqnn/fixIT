@@ -15,8 +15,8 @@
 
 </head>
 
-<body>
-    <div class="wrapper">
+<body class="bg-gray-100">
+    <div class="wrapper bg-white">
         <section>
             @include('layouts_user.header')
         </section>
