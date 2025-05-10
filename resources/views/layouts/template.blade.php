@@ -4,37 +4,52 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Montserrat&family=Poppins&display=swap"
-        rel="stylesheet">
+    <title>@yield('title', 'fixIT')</title>
     @vite('resources/css/app.css')
-    <title>Admin</title>
 </head>
 
-<body class="bg-gray-100">
-    <div class="wrapper bg-white">
-
-        {{-- Header --}}
-        @include('layouts.header')
-
-        {{-- Sidebar --}}
+<body class="bg-gray-100 h-screen">
+    <div class="flex h-full">
         @include('layouts.sidebar')
-
-        {{-- Content --}}
-        <div class="app-content pl-64 pt-14">
-            <div class="container-fluid">
-                @include('layouts.breadcrumb')
-                <section class="content">
-                    @yield('content')
-                </section>
-            </div>
+        <div id="mainContent" class="flex-1 flex flex-col ml-64 transition-all duration-300">
+            @include('layouts.header')
+            <main class="p-6">
+                @yield('content')
+            </main>
         </div>
-
-        {{-- Footer --}}
-        {{-- @include('layouts.footer') --}}
-
     </div>
+    <script>
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        let sidebarVisible = true;
+
+        toggleBtn.addEventListener('click', () => {
+            sidebarVisible = !sidebarVisible;
+
+            if (sidebarVisible) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                mainContent.classList.remove('ml-0');
+                mainContent.classList.add('ml-64');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+                mainContent.classList.remove('ml-64');
+                mainContent.classList.add('ml-0');
+            }
+        });
+
+        const toggleSubmenuBtn = document.getElementById('toggleSubmenu');
+        const submenu = document.getElementById('submenu');
+        const arrowIcon = document.getElementById('arrowIcon');
+
+        toggleSubmenuBtn.addEventListener('click', () => {
+            submenu.classList.toggle('hidden');
+            arrowIcon.classList.toggle('rotate-180'); // animasi panah
+        });
+    </script>
+
 </body>
 
 </html>
