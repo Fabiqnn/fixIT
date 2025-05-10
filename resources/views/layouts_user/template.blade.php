@@ -16,9 +16,15 @@
 </head>
 
 <body class="bg-gray-100">
-    <div class="wrapper bg-white">
+    <div class="wrapper bg-white xl:px-0 mx-auto xl:max-w-[1400px] w-full max-w-full" >
         <section>
             @include('layouts_user.header')
+        </section>
+        <section>
+            @yield('content')
+        </section>
+        <section>
+            @include('layouts_user.footer')
         </section>
     </div>
 </body>
